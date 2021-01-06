@@ -1,37 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React  from 'react';
 import Home from "./Home";
 import About from "./About";
 import styled from 'styled-components'
+import { Link, Switch, Route } from "react-router-dom";
 
 const Container = styled.div`
   background-color: #aaaaaa;
   border: 1px solid blue;
 `
 
-export default function App({ page: initialPage }) {
-  const [page, setPage] = useState(initialPage);
-
-  useEffect(() => {
-    window.onpopstate = event => {
-      setPage(event.state);
-    }
-  },[]);
-
-  function onChangePage(e) {
-    const newPage = e.target.dataset.page;
-    window.history.pushState(newPage, '', `/${newPage}`);
-    setPage(newPage);
-  }
-  const PageComponent = page === 'home' ? Home : About;
+export default function App() {
   return (
     <Container>
-      <button data-page="home" onClick={onChangePage}>
-        Home
-      </button>
-      <button data-page="about" onClick={onChangePage}>
-        About
-      </button>
-      <PageComponent />
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+      </ul>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/about">
+          <About />
+        </Route>
+      </Switch>
     </Container>
   )
 }
