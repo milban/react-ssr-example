@@ -1,7 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-import * as url from 'url';
+import url from 'url';
 import { renderToString } from 'react-dom/server';
 import React from 'react';
 import App from './App';
@@ -16,7 +16,7 @@ app.use('/dist', express.static('dist'));
 app.get('/favicon.ico', (req, res) => res.sendStatus(204));
 app.get('*', (req, res) => {
   const parsedUrl = url.parse(req.url, true);
-  const page = parsedUrl.pathname ? parsedUrl.pathname.substr(1) : 'home';
+  const page = parsedUrl.pathname.substr(1) || 'home';
   const sheet = new ServerStyleSheet();
   const renderString = renderToString(sheet.collectStyles(<App page={page} />));
   const styles = sheet.getStyleTags();
