@@ -9,6 +9,21 @@ const Container = styled.div`
   border: 1px solid blue;
 `
 
+export const routes = [
+  {
+    key: 'home',
+    path: "/",
+    component: Home,
+    exact: true,
+  },
+  {
+    key: 'about',
+    path: "/about",
+    component: About,
+    exact: true,
+  }
+]
+
 export default function App() {
   return (
     <Container>
@@ -21,12 +36,13 @@ export default function App() {
         </li>
       </ul>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/about">
-          <About />
-        </Route>
+        {routes.map(route => <Route key={route.key} {...route} />)}
+        {/*<Route exact path="/">*/}
+        {/*  <Home />*/}
+        {/*</Route>*/}
+        {/*<Route exact path="/about">*/}
+        {/*  <About />*/}
+        {/*</Route>*/}
       </Switch>
     </Container>
   )
