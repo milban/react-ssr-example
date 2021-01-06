@@ -37,12 +37,6 @@ export default function App() {
       </ul>
       <Switch>
         {routes.map(route => <Route key={route.key} {...route} />)}
-        {/*<Route exact path="/">*/}
-        {/*  <Home />*/}
-        {/*</Route>*/}
-        {/*<Route exact path="/about">*/}
-        {/*  <About />*/}
-        {/*</Route>*/}
       </Switch>
     </Container>
   )
